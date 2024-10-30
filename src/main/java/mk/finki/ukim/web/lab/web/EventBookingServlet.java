@@ -49,22 +49,22 @@ public class EventBookingServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IWebExchange webExchange = JakartaServletWebApplication
-                .buildApplication(getServletContext())
-                .buildExchange(req, resp);
+        IWebExchange webExchange = JakartaServletWebApplication.buildApplication(getServletContext()).buildExchange(req, resp);
 
-        // Set up Thymeleaf context
         WebContext context = new WebContext(webExchange, req.getLocale());
-
-        // Get booking information from the form
         String eventName = req.getParameter("eventName");
         String attendeeName = req.getParameter("nameAttendee");
         String attendeeAddress = req.getRemoteAddr();
         int numberOfTickets = Integer.parseInt(req.getParameter("numTickets"));
 
-        // Add booking
         EventBooking booking = bookingService.placeBooking(eventName, attendeeName, attendeeAddress, numberOfTickets);
         context.setVariable("booking", booking);
+
+        // Retrieve only bookings made by this attendee
+        List<SavedBooking> attendeeBookings = bookingService.getBookingsByAttendee(attendeeName);
+        context.setVariable("savedBookingList", attendeeBookings);
+
         springTemplateEngine.process("bookingConfirmation.html", context, resp.getWriter());
     }
+
 }

@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface EventBookingService {
     EventBooking placeBooking(String eventName, String attendeeName, String attendeeAddress, int numberOfTickets);
-    List<SavedBooking> getAllBookings();
+    List<SavedBooking> getBookingsByAttendee(String attendeeName); // New method
 }
+

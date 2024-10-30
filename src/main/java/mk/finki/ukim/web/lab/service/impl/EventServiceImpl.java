@@ -31,7 +31,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void addBooking(String eventName, int tickets) {
-         eventRepository.addBooking(eventName,tickets);
+    public void addBooking(String eventName, String attendeeName,int tickets) {
+         eventRepository.addBooking(eventName,attendeeName,tickets);
     }
 }

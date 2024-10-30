@@ -7,5 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class SavedBooking {
     private String eventName;
+    private String attendeeName;
     private int numberOfTickets;
 }

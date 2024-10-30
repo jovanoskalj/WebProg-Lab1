@@ -29,19 +29,23 @@ public class EventRepository {
         return savedBookings;
     }
 
-    public void addBooking(String eventName, int tickets) {
-        boolean bookingMade = false;
+    public void addBooking(String eventName, String attendeeName, int tickets) {
+        boolean bookingExists = false;
+
         for (SavedBooking booking : savedBookings) {
-            if (booking.getEventName().equals(eventName)) {
+            // Check if booking already exists for this attendee and event
+            if (booking.getEventName().equals(eventName) && booking.getAttendeeName().equals(attendeeName)) {
                 booking.setNumberOfTickets(booking.getNumberOfTickets() + tickets);
-                bookingMade = true;
+                bookingExists = true;
                 break;
             }
         }
-        // If no booking exists, add a new one
-        if (!bookingMade) {
-            savedBookings.add(new SavedBooking(eventName, tickets));
+
+        // If no booking found, add a new one
+        if (!bookingExists) {
+            savedBookings.add(new SavedBooking(eventName, attendeeName, tickets));
         }
     }
+
 }
 

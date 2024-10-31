@@ -24,12 +24,12 @@ public class EventBookingServiceImpl implements EventBookingService {
         return new EventBooking(eventName, attendeeName, attendeeAddress, (long) numberOfTickets);
     }
 
-    @Override
-    public List<SavedBooking> getBookingsByAttendee(String attendeeName) {
-        return eventRepository.getSavedBookings()
-                .stream()
-                .filter(booking -> booking.getAttendeeName().equals(attendeeName))
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<SavedBooking> getBookingsByAttendee(String attendeeName) {
+//        return eventRepository.getSavedBookings()
+//                .stream()
+//                .filter(booking -> booking.getAttendeeName().equals(attendeeName))
+//                .collect(Collectors.toList());
+//    }
 }
 

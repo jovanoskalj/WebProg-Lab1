@@ -8,6 +8,6 @@ import java.util.List;
 public interface EventService {
     List<Event> listAll();
     List<Event> searchEvents(String text,double popularity);
-    List<SavedBooking> getSavedBookings();
+//    List<SavedBooking> getSavedBookings();
     void addBooking(String eventName,String attendeeName,int tickets);
 }

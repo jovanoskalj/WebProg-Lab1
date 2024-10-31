@@ -44,30 +44,7 @@
         </tr>
     </table>
 
-    <!-- Search made bookings by event name -->
-    <form method="get" action="/eventBooking">
-        <label for="bookingSearch">Search by event name:</label>
-        <input type="text" id="bookingSearch" name="bookingSearch">
-        <br/>
-        <input type="submit" value="Submit">
-    </form>
 
-    <div th:if="${not #lists.isEmpty(savedBookingList)}">
-        <h2>Saved Bookings:</h2>
-        <div th:each="savedBooking : ${savedBookingList}">
-            <table>
-                <tr>
-                    <td>Event Name: <span th:text="${savedBooking.eventName}"></span></td>
-                </tr>
-                <tr>
-                    <td>Number of Tickets: <span th:text="${savedBooking.numberOfTickets}"></span></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div th:if="${#lists.isEmpty(savedBookingList)}">
-        <p>No bookings found.</p>
-    </div>
 </section>
 </body>
 </html>

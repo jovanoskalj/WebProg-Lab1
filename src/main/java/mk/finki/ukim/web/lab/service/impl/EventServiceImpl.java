@@ -25,13 +25,19 @@ public class EventServiceImpl implements EventService {
         return eventRepository.searchEvents(text,popularity);
     }
 
-    @Override
-    public List<SavedBooking> getSavedBookings() {
-        return eventRepository.getSavedBookings();
-    }
+//    @Override
+//    public List<SavedBooking> getSavedBookings() {
+//        return eventRepository.getSavedBookings();
+//    }
 
     @Override
-    public void addBooking(String eventName, String attendeeName,int tickets) {
-         eventRepository.addBooking(eventName,attendeeName,tickets);
+    public void addBooking(String eventName, String attendeeName, int tickets) {
+        try {
+            eventRepository.addBooking(eventName, attendeeName, tickets);
+        } catch (IllegalArgumentException e) {
+
+            throw new RuntimeException("Booking failed: " + e.getMessage(), e);
+        }
     }
+
 }

@@ -31,20 +31,20 @@ public class EventBookingServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String result = req.getParameter("bookingSearch");
-
-        // Get all saved bookings
-        List<SavedBooking> allBookings = eventService.getSavedBookings();
-
-        // Filter bookings based on search input
-        List<SavedBooking> bookingsToSend = allBookings.stream()
-                .filter(booking -> booking.getEventName().toLowerCase().contains(result != null ? result.toLowerCase() : ""))
-                .toList();
-
-        IWebExchange iWebExchange = JakartaServletWebApplication.buildApplication(req.getServletContext()).buildExchange(req, resp);
-        WebContext context = new WebContext(iWebExchange);
-        context.setVariable("savedBookingList", bookingsToSend); // Pass filtered bookings to template
-        springTemplateEngine.process("bookingConfirmation.html", context, resp.getWriter());
+//        String result = req.getParameter("bookingSearch");
+//
+////        // Get all saved bookings
+////        List<SavedBooking> allBookings = eventService.getSavedBookings();
+//
+////        // Filter bookings based on search input
+////        List<SavedBooking> bookingsToSend = allBookings.stream()
+////                .filter(booking -> booking.getEventName().toLowerCase().contains(result != null ? result.toLowerCase() : ""))
+////                .toList();
+//
+//        IWebExchange iWebExchange = JakartaServletWebApplication.buildApplication(req.getServletContext()).buildExchange(req, resp);
+//        WebContext context = new WebContext(iWebExchange);
+//        context.setVariable("savedBookingList", bookingsToSend); // Pass filtered bookings to template
+//        springTemplateEngine.process("bookingConfirmation.html", context, resp.getWriter());
     }
 
     @Override
@@ -60,9 +60,9 @@ public class EventBookingServlet extends HttpServlet {
         EventBooking booking = bookingService.placeBooking(eventName, attendeeName, attendeeAddress, numberOfTickets);
         context.setVariable("booking", booking);
 
-        // Retrieve only bookings made by this attendee
-        List<SavedBooking> attendeeBookings = bookingService.getBookingsByAttendee(attendeeName);
-        context.setVariable("savedBookingList", attendeeBookings);
+//        // Retrieve only bookings made by this attendee
+//        List<SavedBooking> attendeeBookings = bookingService.getBookingsByAttendee(attendeeName);
+//        context.setVariable("savedBookingList", attendeeBookings);
 
         springTemplateEngine.process("bookingConfirmation.html", context, resp.getWriter());
     }

@@ -3,6 +3,7 @@ package mk.finki.ukim.web.lab.service.impl;
 import mk.finki.ukim.web.lab.model.Event;
 import mk.finki.ukim.web.lab.model.EventBooking;
 import mk.finki.ukim.web.lab.model.SavedBooking;
+import mk.finki.ukim.web.lab.model.exception.InvalidBookingException;
 import mk.finki.ukim.web.lab.repository.EventRepository;
 import mk.finki.ukim.web.lab.service.EventBookingService;
 import org.springframework.stereotype.Service;
@@ -20,16 +21,14 @@ public class EventBookingServiceImpl implements EventBookingService {
 
     @Override
     public EventBooking placeBooking(String eventName, String attendeeName, String attendeeAddress, int numberOfTickets) {
-        eventRepository.addBooking(eventName,attendeeName, numberOfTickets);
-        return new EventBooking(eventName, attendeeName, attendeeAddress, (long) numberOfTickets);
+
+            eventRepository.addBooking(eventName,attendeeName, numberOfTickets);
+            return new EventBooking(eventName, attendeeName, attendeeAddress, (long) numberOfTickets);
+
+
+
     }
 
-//    @Override
-//    public List<SavedBooking> getBookingsByAttendee(String attendeeName) {
-//        return eventRepository.getSavedBookings()
-//                .stream()
-//                .filter(booking -> booking.getAttendeeName().equals(attendeeName))
-//                .collect(Collectors.toList());
-//    }
+
 }
 

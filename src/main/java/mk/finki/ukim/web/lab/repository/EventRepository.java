@@ -3,6 +3,7 @@ package mk.finki.ukim.web.lab.repository;
 import mk.finki.ukim.web.lab.bootstrap.DataHolder;
 import mk.finki.ukim.web.lab.model.Event;
 import mk.finki.ukim.web.lab.model.SavedBooking;
+import mk.finki.ukim.web.lab.model.exception.InvalidBookingException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -26,17 +27,16 @@ public class EventRepository {
 
         if (event.isPresent()) {
             Event currentEvent = event.get();
-            if (ticketsToBook <= 0) {
-                throw new IllegalArgumentException("Number of tickets must be positive.");
-            }
+
             if (ticketsToBook > currentEvent.getTicketCount()) {
-                throw new IllegalArgumentException("Not enough tickets available.");
+                throw new InvalidBookingException("Not enough tickets available.");
+
             }
-            // Reduce available tickets
+            // namaluvanje na brojot na dostapni bileti
             currentEvent.setTicketCount(currentEvent.getTicketCount() - ticketsToBook);
             return true;
         } else {
-            throw new IllegalArgumentException("Event not found.");
+            throw new InvalidBookingException("Event not found.");
         }
     }
 

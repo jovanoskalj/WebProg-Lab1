@@ -16,12 +16,23 @@ public class Event {
     private Long id;
     private Location location;
 
-    public Event(String name, String description, double popularityScore, int ticketCount) {
+    public Event(String name, String description, double popularityScore, int ticketCount,Location location) {
         this.name = name;
         this.description = description;
         this.popularityScore = popularityScore;
         this.ticketCount = ticketCount;
         Random random = new Random();
         this.id = random.nextLong();
+        this.location=location;
+    }
+
+    public Event(String name, String description, Double popularityScore, Location location) {
+        this.name = name;
+        this.description = description;
+        this.popularityScore = popularityScore;
+
+        Random random = new Random();
+        this.id = random.nextLong();
+        this.location=location;
     }
 }

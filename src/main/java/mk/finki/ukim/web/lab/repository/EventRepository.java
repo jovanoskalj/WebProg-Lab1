@@ -2,6 +2,7 @@ package mk.finki.ukim.web.lab.repository;
 
 import mk.finki.ukim.web.lab.bootstrap.DataHolder;
 import mk.finki.ukim.web.lab.model.Event;
+import mk.finki.ukim.web.lab.model.Location;
 import mk.finki.ukim.web.lab.model.SavedBooking;
 import mk.finki.ukim.web.lab.model.exception.InvalidBookingException;
 import org.springframework.stereotype.Repository;
@@ -18,6 +19,7 @@ public class EventRepository {
     public List<Event> findAll() {
         return DataHolder.events;
     }
+
 
     // Method to handle ticket booking
     public boolean bookTickets(String eventName, int ticketsToBook) throws IllegalArgumentException {
@@ -64,5 +66,23 @@ public class EventRepository {
         if (!bookingExists) {
             savedBookings.add(new SavedBooking(eventName, attendeeName, tickets));
         }
+
+    }
+
+    public void deleteById(Long id) {
+        DataHolder.events.removeIf(i -> i.getId().equals(id));
+    }
+
+    public Optional<Event> findById(Long id) {
+
+        return DataHolder.events.stream().filter(i -> i.getId().equals(id)).findFirst();
+
+    }
+
+    public Optional<Event> save(String name, String description, Double popularityScore, Location location){
+        DataHolder.events.removeIf(i-> i.getName().equals(name));
+        Event event = new Event(name, description, popularityScore, location);
+        DataHolder.events.add(event);
+        return Optional.of(event);
     }
 }

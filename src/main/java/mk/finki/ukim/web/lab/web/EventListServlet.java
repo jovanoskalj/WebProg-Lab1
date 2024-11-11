@@ -18,7 +18,7 @@ import java.util.List;
 
 import static mk.finki.ukim.web.lab.bootstrap.DataHolder.events;
 
-@WebServlet(name="eventlist-servlet",urlPatterns = "/*")
+@WebServlet(name="eventlist-servlet",urlPatterns = "/event-servlet")
 public class EventListServlet extends HttpServlet {
     private final  EventService eventService;
 

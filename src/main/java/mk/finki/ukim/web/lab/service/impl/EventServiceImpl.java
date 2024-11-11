@@ -1,12 +1,15 @@
 package mk.finki.ukim.web.lab.service.impl;
 
 import mk.finki.ukim.web.lab.model.Event;
+import mk.finki.ukim.web.lab.model.Location;
 import mk.finki.ukim.web.lab.model.SavedBooking;
 import mk.finki.ukim.web.lab.repository.EventRepository;
 import mk.finki.ukim.web.lab.service.EventService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
@@ -38,6 +41,21 @@ public class EventServiceImpl implements EventService {
 
             throw new RuntimeException("Booking failed: " + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        eventRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Event> findById(Long id) {
+        return eventRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Event> save(String name, String description, Double popularityScore, Location id) {
+        return eventRepository.save(name, description, popularityScore, id);
     }
 
 }

@@ -25,16 +25,31 @@ public class EventController {
     }
 
     @GetMapping
-    public String getEventsPage(@RequestParam(required = false) String error, Model model, HttpServletRequest req) {
+    public String getEventsPage(@RequestParam(required = false) String error,
+                                @RequestParam(required = false) String searchName,
+                                @RequestParam(required = false) String minRating,
+                                Model model,
+                                HttpServletRequest req) {
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
-            model.addAttribute("error");
+            model.addAttribute("error", error);
         }
-        List<Event> events = this.eventService.listAll();
+
+        List<Event> events;
+        double minRatingValue = minRating != null && !minRating.isEmpty() ? Double.parseDouble(minRating) : 0.0;
+
+        // Check if search text or rating is provided
+        if ((searchName == null || searchName.isEmpty()) && minRatingValue == 0.0) {
+            events = eventService.listAll();
+        } else {
+            events = eventService.searchEvents(searchName, minRatingValue);
+        }
+
         model.addAttribute("events", events);
-        model.addAttribute("clientIpAddress",req.getRemoteAddr());
+        model.addAttribute("clientIpAddress", req.getRemoteAddr());
         return "listEvents.html";
     }
+
 
     @DeleteMapping("/delete/{id}")
     public String deleteEvent(@PathVariable Long id) {

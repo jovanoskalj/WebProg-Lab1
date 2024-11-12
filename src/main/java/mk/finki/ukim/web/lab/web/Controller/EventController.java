@@ -51,7 +51,7 @@ public class EventController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteEvent(@PathVariable Long id) {
         this.eventService.deleteById(id);
         return "redirect:/events";
@@ -90,7 +90,7 @@ public class EventController {
         if (location == null) {
             return "redirect:/events?error=InvalidLocation";
         }
-        this.eventService.save(name, description, popularityScore, location);
+       eventService.save(name, description, popularityScore, location);
         return "redirect:/events";
     }
 

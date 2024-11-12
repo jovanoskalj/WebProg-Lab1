@@ -20,13 +20,15 @@ public class EventBookingServiceImpl implements EventBookingService {
 
     @Override
     public EventBooking placeBooking(String eventName, String attendeeName, String attendeeAddress, int numberOfTickets) {
+        // Create a new EventBooking instance
+        EventBooking booking = new EventBooking(eventName, attendeeName, attendeeAddress, (long) numberOfTickets);
 
-            eventRepository.addBooking(eventName,attendeeName, numberOfTickets);
-            return new EventBooking(eventName, attendeeName, attendeeAddress, (long) numberOfTickets);
+        // Save the booking to the repository
+        bookingRepository.save(booking);
 
-
-
+        return booking;
     }
+
 
     @Override
     public List<EventBooking> filterBookings(String name) {
@@ -35,6 +37,8 @@ public class EventBookingServiceImpl implements EventBookingService {
                 .toList();
     }
 
-
+    @Override
+    public List<EventBooking> getAllBookings() {
+        return bookingRepository.getAllBookings();
+    }
 }
-

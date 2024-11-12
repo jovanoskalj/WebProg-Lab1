@@ -1,6 +1,7 @@
 package mk.finki.ukim.web.lab.service;
 
 import mk.finki.ukim.web.lab.model.Event;
+import mk.finki.ukim.web.lab.model.EventBooking;
 import mk.finki.ukim.web.lab.model.Location;
 import mk.finki.ukim.web.lab.model.SavedBooking;
 
@@ -17,4 +18,5 @@ public interface EventService {
     public Optional<Event> findById(Long id);
 
     Optional<Event> save(String name, String description, Double popularityScore, Location id);
+
 }

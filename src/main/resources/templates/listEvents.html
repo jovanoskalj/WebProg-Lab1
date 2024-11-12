@@ -106,12 +106,12 @@
         </a>
 
 
-        <form th:action="@{/eventBooking}" method="post">
+        <form action="/eventBooking" method="post">
             <div th:each="event : ${events}" class="card event-card mb-3">
                 <div class="card-body">
                     <!-- Radio Button for Event Selection -->
                     <label>
-                        <input type="radio" th:value="${event.name}" name="eventName" class="mr-2">
+                        <input type="radio" th:value="${event.name}" name="eventName" class="mr-2" >
                         <span>
                     <b>Name:</b> <span th:text="${event.name}"></span><br>
                     <b>Description:</b> <span th:text="${event.description}"></span><br>
@@ -126,12 +126,9 @@
                             <i class="fa fa-edit"></i> Edit
                         </a>
 
-                        <!-- Delete Event Button -->
-                        <form th:action="@{'/events/delete/{id}' (id=${event.id})}" th:method="delete" class="d-inline">
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i> Delete
-                            </button>
-                        </form>
+                        <a th:href="@{'/events/delete/{id}' (id=${event.getId()})}" class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash"></i> Delete
+                        </a> <br/>
                     </div>
                 </div>
             </div>
@@ -145,7 +142,7 @@
             <!-- Attendee Name Section -->
             <div class="attendee-section mt-4">
                 <h2>Name of Booking:</h2>
-                <input type="text" name="attendeeName" class="form-control" required>
+                <input type="text" name="Name" class="form-control" required>
             </div>
 
             <!-- IP Address Display Section -->
@@ -154,8 +151,9 @@
                 <span th:text="${clientIpAddress}" class="text-muted"></span>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-success btn-block mt-4">Submit</button>
+            <div class="text-center">
+                <input type="submit" class="btn btn-success" value="Submit">
+            </div>
         </form>
 
 

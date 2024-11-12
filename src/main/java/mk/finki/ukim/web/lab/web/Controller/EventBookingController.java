@@ -25,37 +25,27 @@ public class EventBookingController {
         this.eventBookingRepository = eventBookingRepository;
     }
 
-
     @PostMapping
     public String getBookingPage(@RequestParam String eventName,
-                                 @RequestParam String attendeeName,
+                                 @RequestParam String Name,
                                  @RequestParam String attendeeAddress,
-                                 @RequestParam int numTickets,
+                                 @RequestParam String numTickets,
                                  @RequestParam(required = false) String error,
-                                 Model model) {
+                                 Model model){
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
-            return "listEvents"; // Ensure this redirects to the correct view
+            return "listEvents";
         }
-
-        // Debugging: Check if values are coming through properly
-        System.out.println("Booking Details:");
-        System.out.println("Event Name: " + eventName);
-        System.out.println("Attendee Name: " + attendeeName);
-        System.out.println("Attendee Address: " + attendeeAddress);
-        System.out.println("Number of Tickets: " + numTickets);
-
-        // Create booking and add to repository
-        EventBooking eventBooking = eventBookingService.placeBooking(eventName, attendeeName, attendeeAddress, numTickets);
+        int numberOfTickets=Integer.parseInt(numTickets);
+        EventBooking eventBooking=eventBookingService.placeBooking(eventName,Name,attendeeAddress,numberOfTickets);
         eventBookingRepository.bookings.add(eventBooking);
+        List<EventBooking> allbookings =eventBookingService.filterBookings(Name);
 
-        // Fetch filtered bookings for attendee
-        List<EventBooking> allBookings = eventBookingService.filterBookings(attendeeName);
-        model.addAttribute("booking", eventBooking);
-        model.addAttribute("allBookings", allBookings);
+        model.addAttribute("booking",eventBooking);
+        model.addAttribute("allbookings",allbookings);
 
-        return "bookingConfirmation"; // Make sure this view exists and is correctly rendered
+        return "bookingConfirmation.html";
     }
-
 }
+

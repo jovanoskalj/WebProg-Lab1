@@ -3,46 +3,53 @@
 <head>
     <meta charset="utf-8">
     <title>Booking - Confirmation</title>
-    <style type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
         body {
-            width: 800px;
+            margin: 20px auto;
+        }
+        .table-container {
+            max-width: 800px;
             margin: auto;
-        }
-        table {
-            width:100%;
-        }
-        table, td, th {
-            border: 1px solid black;
-            padding: 3px 2px;
         }
     </style>
 </head>
 <body>
-<section>
-    <header>
-        <h1>Event Booking Page - Booking Confirmation</h1>
+<section class="table-container">
+    <header class="text-center mb-4">
+        <h1 class="display-4">Booking Confirmation</h1>
+        <p class="lead">Event Booking Page - Confirmation Details</p>
     </header>
-    <table>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
         <tr>
-            <th colspan="2">Your Booking Status</th>
+            <th colspan="2" class="text-center">Your Booking Status</th>
         </tr>
+        </thead>
+        <tbody>
         <tr>
-            <td><b>Attendee Name</b></td>
+            <td><strong>Attendee Name</strong></td>
             <td th:text="${booking.attendeeName}"></td>
         </tr>
+
         <tr>
-            <td><b>Client IP Address</b></td>
+            <td><strong>Client IP Address</strong></td>
             <td th:text="${booking.attendeeAddress}"></td>
         </tr>
         <tr>
-            <td><b>Booking for Event</b></td>
+            <td><strong>Booking for Event</strong></td>
             <td th:text="${booking.eventName}"></td>
         </tr>
         <tr>
-            <td><b>Number of tickets</b></td>
+            <td><strong>Number of Tickets</strong></td>
             <td th:text="${booking.numberOfTickets}"></td>
         </tr>
+        </tbody>
     </table>
 </section>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
